@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Homeaway Seattle Search</string>
+    <string name="lorem"> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus at ipsum non arcu accumsan bibendum in sit amet felis. Vestibulum aliquet odio vel ornare maximus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nulla dapibus ornare neque, sed euismod leo molestie ut. Fusce tempus ornare consectetur. Donec commodo lobortis sapien, sed gravida ex dapibus nec. Sed faucibus vitae dui a efficitur. Nunc lacinia sapien egestas sollicitudin finibus.
+
+Pellentesque a quam dui. Curabitur ultrices nec leo vel lobortis. Suspendisse vulputate molestie lorem, eget tempor enim mattis vestibulum. Pellentesque quis vestibulum nisi, nec elementum justo. Vivamus sit amet tincidunt odio, nec egestas est. Morbi fermentum augue sollicitudin aliquam euismod. Sed suscipit, libero eget vulputate scelerisque, diam mauris rhoncus lectus, at accumsan risus elit non massa. Aliquam commodo ligula lacus, a fermentum neque eleifend et. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Ut venenatis euismod metus id ultricies.
+
+Aliquam consequat enim ut luctus tempus. Vivamus nec quam lectus. Integer id efficitur elit. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Ut rutrum quam ut ligula varius lobortis. Sed placerat ante nec faucibus efficitur. Vivamus viverra magna euismod tellus cursus, sed tincidunt libero consequat. Vivamus at sapien nunc. Morbi lacinia dignissim est at efficitur. Praesent ut euismod sapien, ac bibendum diam. In varius leo non condimentum pulvinar.
+
+Etiam quis quam eros. Cras accumsan ligula eget urna euismod, id mattis enim fermentum. Pellentesque vitae purus luctus libero fermentum placerat. Nam eget hendrerit orci. Pellentesque pretium rutrum maximus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur lorem augue, lobortis interdum turpis non, pellentesque iaculis nibh. Suspendisse id cursus metus, nec viverra diam. Cras tempus, neque quis pellentesque volutpat, eros nunc laoreet diam, vitae tristique risus mauris a quam. Sed at elit quis nunc porta vulputate a id leo. Ut vel porttitor risus. </string>
+    <string name="title_activity_maps">Map</string>
+    <string name="distance_from_center_seattle">%1$s miles from the center of Seattle</string>
+</resources>
