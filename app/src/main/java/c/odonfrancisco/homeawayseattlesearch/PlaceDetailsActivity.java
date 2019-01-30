@@ -1,12 +1,10 @@
 package c.odonfrancisco.homeawayseattlesearch;
 
-import android.support.design.widget.CollapsingToolbarLayout;
-import android.support.v4.app.FragmentActivity;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
 
-import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -15,8 +13,6 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.MarkerOptions;
-
-import java.util.ArrayList;
 
 public class PlaceDetailsActivity extends AppCompatActivity implements OnMapReadyCallback {
     private GoogleMap mMap;
@@ -31,6 +27,7 @@ public class PlaceDetailsActivity extends AppCompatActivity implements OnMapRead
 
         int position = getIntent().getIntExtra("position", -1);
 
+        //very bad. do not do this, ever
         currentPlace = ListResultsActivity.mPlaceList.get(position);
 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
@@ -48,7 +45,7 @@ public class PlaceDetailsActivity extends AppCompatActivity implements OnMapRead
         mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
 
         LatLng currentLatLng = currentPlace.getLatLng();
-        LatLng centralSeattle = MainActivity.seattleCenterll;
+        LatLng centralSeattle = Constants.seattleCenterll;
 
         setMapMarkers(mMap, currentLatLng, centralSeattle);
         setMapBounds(mMap, currentLatLng, centralSeattle);

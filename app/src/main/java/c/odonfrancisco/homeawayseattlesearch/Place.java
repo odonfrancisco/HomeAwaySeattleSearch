@@ -1,12 +1,8 @@
 package c.odonfrancisco.homeawayseattlesearch;
 
 import android.graphics.Bitmap;
-import android.location.Address;
-import android.net.Uri;
 
 import com.google.android.gms.maps.model.LatLng;
-
-import java.net.URI;
 
 public class Place {
     private String id;
@@ -20,8 +16,8 @@ public class Place {
     private boolean favorited;
 
     // Constructor
-    public Place(String id, String name, String category, String address,
-                 double lat, double lng, Bitmap icon, String distance, boolean favorited){
+    Place(String id, String name, String category, String address,
+          double lat, double lng, Bitmap icon, String distance, boolean favorited){
         this.id = id;
         this.name = name;
         this.category = category;

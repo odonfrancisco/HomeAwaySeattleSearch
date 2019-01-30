@@ -2,9 +2,6 @@ package c.odonfrancisco.homeawayseattlesearch;
 
 
 import android.content.Context;
-import android.content.res.Resources;
-import android.net.Uri;
-import android.support.annotation.StringRes;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -21,6 +18,8 @@ public class PlaceListAdapter extends BaseAdapter {
 
     // Constructor
     // Why is it telling me access can be private even though I'm using it in another activity?
+
+    //use a damn rv!
     public PlaceListAdapter(Context mContext, ArrayList<Place> mPlaceList){
         this.mContext = mContext;
         this.mPlaceList = mPlaceList;

@@ -1,8 +1,8 @@
 package c.odonfrancisco.homeawayseattlesearch;
 
 import android.content.Intent;
-import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -13,10 +13,6 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -51,7 +47,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap = googleMap;
 
         // Add a marker in Sydney and move the camera
-        LatLng seattleCenter = MainActivity.seattleCenterll;
+        LatLng seattleCenter = Constants.seattleCenterll;
         mMap.addMarker(new MarkerOptions().position(seattleCenter).title("Center of Seattle"));
 
         addMapMarkers(ListResultsActivity.mPlaceList);

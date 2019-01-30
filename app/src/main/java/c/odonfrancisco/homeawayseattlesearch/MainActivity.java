@@ -2,12 +2,11 @@ package c.odonfrancisco.homeawayseattlesearch;
 
 import android.content.Intent;
 import android.os.AsyncTask;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
-
-import com.google.android.gms.maps.model.LatLng;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -15,15 +14,13 @@ import org.json.JSONObject;
 
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.Serializable;
-import java.lang.reflect.Array;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
+    private static final String TAG = MainActivity.class.getSimpleName();
     EditText searchTermView;
-    static LatLng seattleCenterll = new LatLng(47.6062, -122.3321);
 
     public class DownloadTask extends AsyncTask<String, Void, String> {
 
@@ -94,9 +91,8 @@ public class MainActivity extends AppCompatActivity {
         String clientId = "D3P13HOKAGT1OJERCTPDFK3NZS4MXXDE1XW3X52XA3LOJ3IQ";
         String clientSecret = "I5T5ISW5VPCN5NH5D2R2THHXMDJ5WRZQNDA0DKWRYAFEPYJ3";
 
-//        String apiHttp = "https://api.foursquare.com/v2/venues/explore?";
-
-        String apiHttp = "https://api.foursquare.com/v2/venues/search?";
+//        String apiHttp = "https://api.foursquare.com/v2/venues/explore?"
+        String apiHttp = Constants.BASE_URL + "venues/search?";
 //        String apiHttp = "https://api.foursquare.com/v2/venues/suggestcompletion?";
 
         String v = "20180323";
@@ -115,14 +111,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void beginListActivity(ArrayList<Object> results){
-        Intent intent = new Intent(this, ListResultsActivity.class);
 
+        Intent intent = new Intent(this, ListResultsActivity.class);
         intent.putExtra("Results", results);
 
-        System.out.println("YEAST");
+        Log.d(TAG, "YEAST");
         System.out.println(results);
 
         startActivity(intent);
-
     }
 }

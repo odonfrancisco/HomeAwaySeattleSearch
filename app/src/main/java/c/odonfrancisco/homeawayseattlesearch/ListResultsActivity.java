@@ -3,19 +3,13 @@ package c.odonfrancisco.homeawayseattlesearch;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.location.Address;
-import android.net.Uri;
 import android.os.AsyncTask;
-import android.os.Parcel;
-import android.os.Parcelable;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -23,19 +17,19 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
-import java.net.URI;
 import java.net.URL;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 public class ListResultsActivity extends AppCompatActivity {
 
     private ListView resultsListView;
+
+    /*VERy VEry Bad.  Don't do this!
+     */
     // Is it a good idea to make this static to access it from the main maps page?
     static ArrayList<Place> mPlaceList = new ArrayList<>();
-
 
     private class ImageDownloader extends AsyncTask<String, Void, Bitmap> {
 
