@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
     private RecyclerView resultsList;
     private Toolbar toolbar_search_input;
     private FloatingActionButton floatingActionButton;
-    private ArrayList<Parcelable> parcelablePlaceList = new ArrayList<>();
+    private ArrayList<Parcelable> parcelablePlaceList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -118,6 +118,7 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
     private ArrayList<Place> parseData(JSONArray results ){
 
         ArrayList<Place> mPlaceList = new ArrayList<>();
+        parcelablePlaceList = new ArrayList<>();
 
         for(int i=0; i<results.length(); i++){
             // Should I be putting all the code inside the try block or should
@@ -135,8 +136,6 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-//            Log.d(TAG, gson.toJson(place));
-//            Log.d(TAG, gson.toJson(place.getLatLng()));
 
 //                ListResultsActivity.ImageDownloader imageDownloader = new ListResultsActivity.ImageDownloader();
 //
@@ -171,7 +170,10 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
 //                System.out.println(currentObj);
 
             mPlaceList.add(place);
+            Log.d(TAG, gson.toJson(place));
+
             parcelablePlaceList.add(Parcels.wrap(place));
+            Log.d(TAG, gson.toJson(Parcels.unwrap(Parcels.wrap(place))));
 
         }
         return mPlaceList;
