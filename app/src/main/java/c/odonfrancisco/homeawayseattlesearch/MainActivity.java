@@ -2,7 +2,10 @@ package c.odonfrancisco.homeawayseattlesearch;
 
 import android.app.SearchManager;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -22,6 +25,7 @@ import com.google.gson.GsonBuilder;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.parceler.Parcels;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -36,18 +40,19 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class MainActivity extends AppCompatActivity implements SearchView.OnQueryTextListener {
     private static final String TAG = MainActivity.class.getSimpleName();
 
-//    private EditText searchTermView;
     private RecyclerView resultsList;
     private Toolbar toolbar_search_input;
+    private FloatingActionButton floatingActionButton;
+    private ArrayList<Parcelable> parcelablePlaceList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-//        searchTermView = findViewById(R.id.searchInput);
         resultsList = findViewById(R.id.results_recyclerview);
         toolbar_search_input = findViewById(R.id.search_input);
+        floatingActionButton = findViewById(R.id.floating_action_button);
 
         setSupportActionBar(toolbar_search_input);
         ActionBar actionBar = getSupportActionBar();
@@ -84,6 +89,9 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
 
                     Log.d(TAG, resultsArr.toString());
 
+//                    Whats the right way to do this? Should I return something to the original
+//                            call of useRetrofit() and then call showResults() or
+//                            is what Im currently doing ok?
                     showResults(parseData(resultsArr));
 
                 } catch (IOException e) {
@@ -127,7 +135,8 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-            Log.d(TAG, gson.toJson(place));
+//            Log.d(TAG, gson.toJson(place));
+//            Log.d(TAG, gson.toJson(place.getLatLng()));
 
 //                ListResultsActivity.ImageDownloader imageDownloader = new ListResultsActivity.ImageDownloader();
 //
@@ -162,6 +171,7 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
 //                System.out.println(currentObj);
 
             mPlaceList.add(place);
+            parcelablePlaceList.add(Parcels.wrap(place));
 
         }
         return mPlaceList;
@@ -185,13 +195,20 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
     @Override
     public boolean onQueryTextSubmit(String query) {
         useRetrofit(query);
+//        What does this return do?
         return false;
     }
 
     @Override
     public boolean onQueryTextChange(String newText) {
-        useRetrofit(newText);
+        if(newText.length() == 0){
+            floatingActionButton.hide();
+        } else {
+            floatingActionButton.show();
+            useRetrofit(newText);
+        }
 
+//        same
         return false;
     }
 
@@ -199,4 +216,19 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
     public void onPointerCaptureChanged(boolean hasCapture) {
 
     }
+
+    public void viewResultsMap(View view){
+        Intent intent = new Intent(this, MapsActivity.class);
+
+        intent.putParcelableArrayListExtra("placesArray", parcelablePlaceList);
+
+        Place onePlace = Parcels.unwrap(parcelablePlaceList.get(0));
+
+        Log.d(TAG, String.valueOf(onePlace.getLat()));
+
+        startActivity(intent);
+
+    }
+
+
 }

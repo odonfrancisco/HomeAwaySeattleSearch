@@ -2,7 +2,9 @@ package c.odonfrancisco.homeawayseattlesearch;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.v4.app.FragmentActivity;
+import android.util.Log;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -14,22 +16,34 @@ import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import org.parceler.Parcels;
+
 import java.util.ArrayList;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
+    private static final String TAG = MapsActivity.class.getSimpleName();
 
     private GoogleMap mMap;
+    private ArrayList<Place> placesArrayList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
+
+        ArrayList<Parcelable> parcelableArrayList = getIntent().getParcelableArrayListExtra("placesArray");
+
+        for(int i=0; i<parcelableArrayList.size(); i++){
+            placesArrayList.add((Place) Parcels.unwrap(parcelableArrayList.get(0)));
+        }
+
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
-        System.out.println(ListResultsActivity.mPlaceList);
+        System.out.println("PLaces array list");
+        System.out.println(placesArrayList);
 
     }
 
@@ -50,7 +64,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         LatLng seattleCenter = Constants.seattleCenterll;
         mMap.addMarker(new MarkerOptions().position(seattleCenter).title("Center of Seattle"));
 
-        addMapMarkers(ListResultsActivity.mPlaceList);
+        addMapMarkers(placesArrayList);
         setOnMapMarkerClickListener(mMap);
     }
 
@@ -61,6 +75,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             Place currentPlace = placesList.get(i);
 
             LatLng currentLatLng = currentPlace.getLatLng();
+            if(i == 1)Log.d(TAG, currentLatLng.toString());
 
             Marker mMarker = mMap.addMarker(new MarkerOptions().position(currentLatLng).title(currentPlace.getName()).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA)));
             mMarker.setTag(i);
