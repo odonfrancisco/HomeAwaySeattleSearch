@@ -65,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
 
                 Log.d(TAG, response.body().toString());
                 try {
-                    response.body().close();
+//                    response.body().close();
 
                     JSONArray resultsArr = new JSONObject(response.body().string())
                             .getJSONObject("response")
@@ -94,7 +94,6 @@ public class MainActivity extends AppCompatActivity {
 
         resultsList.setAdapter(adapter);
         resultsList.setLayoutManager(new LinearLayoutManager(this));
-
     }
 
     private ArrayList<Place> parseData(JSONArray results ){
@@ -102,22 +101,22 @@ public class MainActivity extends AppCompatActivity {
         ArrayList<Place> mPlaceList = new ArrayList<>();
 
         for(int i=0; i<results.length(); i++){
-            // Should I be putting all the code inside the try block or shou
+            // Should I be putting all the code inside the try block or should
             // I only have new JSONObject inside it?
+
+//            Am I doing this correctly? Seems vaguely similar to what I was doing before
+            GsonBuilder gsonbuilder = new GsonBuilder();
+            gsonbuilder.registerTypeAdapter(Place.class, new PlaceDeserializer());
+            Gson gson = gsonbuilder.create();
+
+            Place place = null;
+
             try {
-                GsonBuilder gsonbuilder = new GsonBuilder();
-
-//                Place newPlace = gson.fromJson(results.getJSONObject(i).toString(), Place.class);
-//                Log.d("newPlace", gson.toJson(newPlace));
-
-                gsonbuilder.registerTypeAdapter(Place.class, new PlaceDeserializer());
-
-                Gson gson = gsonbuilder.create();
-
-                Place place = gson.fromJson(results.get(i).toString(), Place.class);
-
-                Log.d(TAG, gson.toJson(place));
-                // Convert to using gson
+                place = gson.fromJson(results.get(i).toString(), Place.class);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            Log.d(TAG, gson.toJson(place));
 
 //                ListResultsActivity.ImageDownloader imageDownloader = new ListResultsActivity.ImageDownloader();
 //
@@ -151,15 +150,8 @@ public class MainActivity extends AppCompatActivity {
 //                System.out.println("CURRENTOBJ");
 //                System.out.println(currentObj);
 
-                mPlaceList.add(place);
+            mPlaceList.add(place);
 
-            } catch (JSONException e) {
-                e.printStackTrace();
-//            } catch (InterruptedException e) {
-//                e.printStackTrace();
-//            } catch (ExecutionException e) {
-//                e.printStackTrace();
-            }
         }
         return mPlaceList;
     }

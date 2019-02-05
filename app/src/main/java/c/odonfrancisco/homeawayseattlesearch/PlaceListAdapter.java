@@ -57,7 +57,7 @@ public class PlaceListAdapter extends BaseAdapter {
 
         String message = mContext.getResources().getString(R.string.distance_from_center_seattle, currentPlace.getDistance());
         placeDistance.setText(message);
-        placeIcon.setImageBitmap(currentPlace.getIcon());
+//        placeIcon.setImageBitmap(currentPlace.getIcon());
 
         if(mPlaceList.get(position).isFavorited()){
             placeFavorited.setText("Your favorite!!");

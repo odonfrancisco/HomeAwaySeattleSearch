@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
+import android.util.Log;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -13,8 +14,11 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.gson.Gson;
 
 public class PlaceDetailsActivity extends AppCompatActivity implements OnMapReadyCallback {
+    private static final String TAG = PlaceDetailsActivity.class.getSimpleName();
+
     private GoogleMap mMap;
     private Place currentPlace;
 
@@ -25,10 +29,17 @@ public class PlaceDetailsActivity extends AppCompatActivity implements OnMapRead
 
         CollapsingToolbarLayout toolbarLayout = findViewById(R.id.toolBarLayout);
 
-        int position = getIntent().getIntExtra("position", -1);
+        Gson gson = new Gson();
+
+//        Should I be using Parcelable instead of gson?
+        currentPlace = gson.fromJson(getIntent().getSerializableExtra("currentPlace").toString(), Place.class);
+
+        Log.d(TAG, gson.toJson(currentPlace));
+
+//        int position = getIntent().getIntExtra("position", -1);
 
         //very bad. do not do this, ever
-        currentPlace = ListResultsActivity.mPlaceList.get(position);
+//        currentPlace = ListResultsActivity.mPlaceList.get(position);
 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.placeDetailsMap);

@@ -1,7 +1,5 @@
 package c.odonfrancisco.homeawayseattlesearch;
 
-import android.graphics.Bitmap;
-
 import com.google.android.gms.maps.model.LatLng;
 
 public class Place {
@@ -11,13 +9,13 @@ public class Place {
     private String address;
     private double lat;
     private double lng;
-    private Bitmap icon;
+    private String icon;
     private String distance;
     private boolean favorited;
 
     // Constructor
     Place(String id, String name, String category, String address,
-          double lat, double lng, Bitmap icon, String distance, boolean favorited){
+          double lat, double lng, String icon, String distance, boolean favorited){
         this.id = id;
         this.name = name;
         this.category = category;
@@ -85,11 +83,11 @@ public class Place {
         return latLng;
     }
 
-    public Bitmap getIcon() {
+    public String getIcon() {
         return icon;
     }
 
-    public void setIcon(Bitmap icon) {
+    public void setIcon(String icon) {
         this.icon = icon;
     }
 

@@ -116,13 +116,13 @@ public class ListResultsActivity extends AppCompatActivity {
                         .format(distanceInMeters/1609.344);
                 boolean favorited = false;
 
-                Place currentPlace = new Place(id, name, categoryName,
-                        address, lat, lng, icon, distance, favorited);
+//                Place currentPlace = new Place(id, name, categoryName,
+//                        address, lat, lng, icon, distance, favorited);
 
                 System.out.println("CURRENTOBJ");
                 System.out.println(currentObj);
 
-                mPlaceList.add(currentPlace);
+//                mPlaceList.add(currentPlace);
 
             } catch (JSONException e) {
                 e.printStackTrace();
