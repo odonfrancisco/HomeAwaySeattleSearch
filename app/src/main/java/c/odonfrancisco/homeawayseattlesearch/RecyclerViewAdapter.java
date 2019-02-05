@@ -16,6 +16,8 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 
+import org.parceler.Parcels;
+
 import java.util.ArrayList;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
@@ -63,7 +65,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                 Intent intent = new Intent(v.getContext(), PlaceDetailsActivity.class);
                 Gson gson = new Gson();
 
-                intent.putExtra("currentPlace", gson.toJson(currentPlace));
+                intent.putExtra("currentPlace", Parcels.wrap(currentPlace));
 
                 v.getContext().startActivity(intent);
             }

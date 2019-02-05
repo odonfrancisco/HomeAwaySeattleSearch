@@ -1,12 +1,20 @@
 package c.odonfrancisco.homeawayseattlesearch;
 
+import android.app.SearchManager;
+import android.content.Context;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.SearchView;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -25,26 +33,29 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements SearchView.OnQueryTextListener {
     private static final String TAG = MainActivity.class.getSimpleName();
 
-    EditText searchTermView;
-    RecyclerView resultsList;
+//    private EditText searchTermView;
+    private RecyclerView resultsList;
+    private Toolbar toolbar_search_input;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        searchTermView = findViewById(R.id.searchInput);
+//        searchTermView = findViewById(R.id.searchInput);
         resultsList = findViewById(R.id.results_recyclerview);
+        toolbar_search_input = findViewById(R.id.search_input);
+
+        setSupportActionBar(toolbar_search_input);
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+
     }
 
-    public void searchButtonClicked(View view){
-        useRetrofit();
-    }
-
-    private void useRetrofit(){
+    private void useRetrofit(String query){
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(Constants.BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
@@ -52,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
         FoursquareApi foursquareApi = retrofit.create(FoursquareApi.class);
 
         Call<ResponseBody> call = foursquareApi.getPlaces("23",
-                Constants.seattleCenterllString, searchTermView.getText().toString());
+                Constants.seattleCenterllString, query);
 
         call.enqueue(new Callback<ResponseBody>() {
             @Override
@@ -154,5 +165,38 @@ public class MainActivity extends AppCompatActivity {
 
         }
         return mPlaceList;
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu){
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.options_menu, menu);
+
+        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+        MenuItem mSearchMenuItem = menu.findItem(R.id.menu_toolbar_search);
+        SearchView searchView = (SearchView) mSearchMenuItem.getActionView();
+        searchView.setQueryHint("Search Seattle!");
+        searchView.setOnQueryTextListener(this);
+        Log.d(TAG, "onCreateOptionsMenu: mSearchMenuItem -> " + mSearchMenuItem.getActionView());
+
+        return true;
+    }
+
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        useRetrofit(query);
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String newText) {
+        useRetrofit(newText);
+
+        return false;
+    }
+
+    @Override
+    public void onPointerCaptureChanged(boolean hasCapture) {
+
     }
 }

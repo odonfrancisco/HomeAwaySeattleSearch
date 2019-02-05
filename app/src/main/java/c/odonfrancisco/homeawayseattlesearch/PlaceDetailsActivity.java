@@ -1,10 +1,12 @@
 package c.odonfrancisco.homeawayseattlesearch;
 
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.widget.TextView;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -15,6 +17,8 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.gson.Gson;
+
+import org.parceler.Parcels;
 
 public class PlaceDetailsActivity extends AppCompatActivity implements OnMapReadyCallback {
     private static final String TAG = PlaceDetailsActivity.class.getSimpleName();
@@ -31,14 +35,16 @@ public class PlaceDetailsActivity extends AppCompatActivity implements OnMapRead
 
         Gson gson = new Gson();
 
-//        Should I be using Parcelable instead of gson?
-        currentPlace = gson.fromJson(getIntent().getSerializableExtra("currentPlace").toString(), Place.class);
+//          Should I be using Parcelable instead of gson?
+//            yes
+//        currentPlace = gson.fromJson(getIntent().getSerializableExtra("currentPlace").toString(), Place.class);
+        currentPlace = Parcels.unwrap(getIntent().getParcelableExtra("currentPlace"));
 
         Log.d(TAG, gson.toJson(currentPlace));
 
-//        int position = getIntent().getIntExtra("position", -1);
 
         //very bad. do not do this, ever
+//        int position = getIntent().getIntExtra("position", -1);
 //        currentPlace = ListResultsActivity.mPlaceList.get(position);
 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
@@ -46,7 +52,7 @@ public class PlaceDetailsActivity extends AppCompatActivity implements OnMapRead
         mapFragment.getMapAsync(this);
 
         toolbarLayout.setTitle(currentPlace.getName());
-
+        setDetailsText(currentPlace);
     }
 
     @Override
@@ -76,10 +82,20 @@ public class PlaceDetailsActivity extends AppCompatActivity implements OnMapRead
         DisplayMetrics displayMetrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
 
-        System.out.println("WIDTH");
-        System.out.println(displayMetrics.widthPixels);
-
         map.moveCamera(CameraUpdateFactory.newLatLngBounds(bounds.build(), displayMetrics.widthPixels, 250, 0));
+    }
+//    Should I be taking a layout file from my resources and
+//        populating it here or is what Im doing correct?
+
+    private void setDetailsText(Place place){
+        TextView placeAddressText = findViewById(R.id.place_address);
+        TextView placeCategoryText = findViewById(R.id.place_category);
+        TextView placeDistanceText = findViewById(R.id.place_distance);
+
+        placeAddressText.setText(place.getAddress());
+        placeCategoryText.setText(place.getCategory());
+        placeDistanceText.setText(place.getDistance());
+
     }
 
 }

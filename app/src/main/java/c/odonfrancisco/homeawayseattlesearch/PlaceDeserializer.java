@@ -18,16 +18,24 @@ public class PlaceDeserializer implements JsonDeserializer<Place> {
         ListResultsActivity.ImageDownloader imageDownloader = new ListResultsActivity.ImageDownloader();
 
         JsonElement location = jsonObj.get("location").getAsJsonObject();
-        JsonElement category = jsonObj.get("categories").getAsJsonArray()
-                .get(0).getAsJsonObject();
 
-        String iconPrefix = category.getAsJsonObject().get("icon").getAsJsonObject().get("prefix").getAsString();
-        String iconSuffix = category.getAsJsonObject().get("icon").getAsJsonObject().get("suffix").getAsString();
-        String iconString = iconPrefix + "bg_88" + iconSuffix;
+        String categoryName = "No Category for this place";
+
+        String iconString = "https://cdn2.iconfinder.com/data/icons/metro-uinvert-dock/256/Default.png";
+
+        if(jsonObj.get("categories").getAsJsonArray().size() > 0){
+
+            JsonElement category = jsonObj.get("categories").getAsJsonArray()
+                    .get(0).getAsJsonObject();
+
+            String iconPrefix = category.getAsJsonObject().get("icon").getAsJsonObject().get("prefix").getAsString();
+            String iconSuffix = category.getAsJsonObject().get("icon").getAsJsonObject().get("suffix").getAsString();
+            categoryName = category.getAsJsonObject().get("name").getAsString();
+            iconString = iconPrefix + "bg_88" + iconSuffix;
+        }
 
         String id = jsonObj.get("id").getAsString();
         String name = jsonObj.get("name").getAsString();
-        String categoryName = category.getAsJsonObject().get("name").getAsString();
         String address = location.getAsJsonObject().get("formattedAddress").getAsJsonArray().get(0).getAsString();
         double lat = location.getAsJsonObject().get("lat").getAsDouble();
         double lng = location.getAsJsonObject().get("lng").getAsDouble();

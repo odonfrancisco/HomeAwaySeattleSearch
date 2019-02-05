@@ -2,19 +2,24 @@ package c.odonfrancisco.homeawayseattlesearch;
 
 import com.google.android.gms.maps.model.LatLng;
 
+import org.parceler.Parcel;
+
+@Parcel
 public class Place {
-    private String id;
-    private String name;
-    private String category;
-    private String address;
-    private double lat;
-    private double lng;
-    private String icon;
-    private String distance;
-    private boolean favorited;
+    String id;
+    String name;
+    String category;
+    String address;
+    double lat;
+    double lng;
+    String icon;
+    String distance;
+    boolean favorited;
+
+    public Place(){}
 
     // Constructor
-    Place(String id, String name, String category, String address,
+    public Place(String id, String name, String category, String address,
           double lat, double lng, String icon, String distance, boolean favorited){
         this.id = id;
         this.name = name;

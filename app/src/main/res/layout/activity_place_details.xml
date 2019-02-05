@@ -45,25 +45,47 @@
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:padding="16dp"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <TextView
+        <!--<TextView-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:lineSpacingExtra="8sp"-->
+            <!--android:padding="16dp"-->
+            <!--android:text="@string/lorem"-->
+            <!--android:textColor="@color/colorAccent"-->
+            <!--android:textSize="24sp" />-->
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/colorAccent"
-            android:textSize="24sp"
-            android:lineSpacingExtra="8sp"
-            android:padding="16dp"
-            android:text="@string/lorem"/>
-        <!--<TextView-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:id="@+id/place_address"/>-->
-            <!---->
-        <!--<TextView-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:id="@id/place_"/>-->
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/place_address"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Place Address" />
+
+            <TextView
+                android:id="@id/place_category"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/place_address"
+                android:text="Place Category" />
+
+            <TextView
+                android:id="@id/place_distance"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/place_category"
+                android:text="Place Distance" />
+
+
+        </LinearLayout>
+
+
     </android.support.v4.widget.NestedScrollView>
 
 
