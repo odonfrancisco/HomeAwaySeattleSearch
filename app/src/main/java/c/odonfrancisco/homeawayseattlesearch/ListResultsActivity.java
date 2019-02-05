@@ -26,12 +26,13 @@ public class ListResultsActivity extends AppCompatActivity {
 
     private ListView resultsListView;
 
-    /*VERy VEry Bad.  Don't do this!
+    /*
+        VERy VEry Bad.  Don't do this!
      */
     // Is it a good idea to make this static to access it from the main maps page?
     static ArrayList<Place> mPlaceList = new ArrayList<>();
 
-    private class ImageDownloader extends AsyncTask<String, Void, Bitmap> {
+    public static class ImageDownloader extends AsyncTask<String, Void, Bitmap> {
 
         protected Bitmap doInBackground(String ...strings){
 
@@ -82,7 +83,7 @@ public class ListResultsActivity extends AppCompatActivity {
 
     }
 
-    protected void generateListView(ArrayList<Object> resultsList){
+    public ArrayList<Place> generateListView(ArrayList<Object> resultsList){
         PlaceListAdapter adapter;
 
         for(int i=0; i<resultsList.size(); i++){
@@ -134,7 +135,8 @@ public class ListResultsActivity extends AppCompatActivity {
 
         adapter = new PlaceListAdapter(this, mPlaceList);
 
-        resultsListView.setAdapter(adapter);
+        return mPlaceList;
+//        resultsListView.setAdapter(adapter);
     }
 
     public void clickFloatingActionButton(View view){

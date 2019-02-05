@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/recyclerview_layout">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/place_icon"
+        android:layout_marginRight="20dp"
+        android:src="@mipmap/ic_launcher"/>
+
+    <TextView
+        android:id="@+id/place_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/place_icon"
+        android:text="Place Name" />
+
+    <TextView
+        android:id="@+id/place_category"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/place_icon"
+        android:layout_below="@+id/place_name"
+        android:text="Place Category" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_toRightOf="@+id/place_icon"
+        android:layout_height="wrap_content"
+        android:id="@+id/place_distance"
+        android:layout_below="@+id/place_category"
+        android:text="Place Distance"/>
+
+    <TextView
+        android:id="@+id/place_favorited"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/place_icon"
+        android:layout_below="@+id/place_distance"
+        android:text="Place Favorited" />
+
+
+
+</RelativeLayout>
