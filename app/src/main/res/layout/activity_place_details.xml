@@ -82,8 +82,16 @@
                 android:layout_below="@id/place_category"
                 android:text="Place Distance" />
 
+            <ImageView
+                android:id="@+id/star_image"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/place_distance"
+                android:onClick="toggleFavorite"
+                android:src="@drawable/ic_star_border_black_24dp"/>
 
         </LinearLayout>
+
 
 
     </android.support.v4.widget.NestedScrollView>

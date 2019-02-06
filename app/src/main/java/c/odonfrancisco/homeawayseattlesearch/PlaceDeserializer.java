@@ -15,7 +15,6 @@ public class PlaceDeserializer implements JsonDeserializer<Place> {
 
         JsonObject jsonObj = json.getAsJsonObject();
 
-        ListResultsActivity.ImageDownloader imageDownloader = new ListResultsActivity.ImageDownloader();
 
         JsonElement location = jsonObj.get("location").getAsJsonObject();
 

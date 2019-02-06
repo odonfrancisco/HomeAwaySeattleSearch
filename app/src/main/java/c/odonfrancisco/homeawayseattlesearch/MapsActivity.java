@@ -26,13 +26,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     private GoogleMap mMap;
     private ArrayList<Place> placesArrayList = new ArrayList<>();
+    private ArrayList<Parcelable> parcelableArrayList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
 
-        ArrayList<Parcelable> parcelableArrayList = getIntent().getParcelableArrayListExtra("placesArray");
+        parcelableArrayList = getIntent().getParcelableArrayListExtra("placesArray");
 
         for(int i=0; i<parcelableArrayList.size(); i++){
             placesArrayList.add((Place) Parcels.unwrap(parcelableArrayList.get(i)));
@@ -96,7 +97,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 if(marker.getTag() != null) {
 
                     Intent intent = new Intent(getApplicationContext(), PlaceDetailsActivity.class);
-                    intent.putExtra("position", Integer.parseInt(marker.getTag().toString()));
+                    intent.putExtra("currentPlace", parcelableArrayList.get((int) marker.getTag()));
 
                     startActivity(intent);
 

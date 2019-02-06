@@ -137,7 +137,6 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
                 e.printStackTrace();
             }
 
-//                ListResultsActivity.ImageDownloader imageDownloader = new ListResultsActivity.ImageDownloader();
 //
 //                JSONObject currentObj = new JSONObject(results.get(i).toString());
 //                JSONObject location = currentObj.getJSONObject("location");

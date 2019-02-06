@@ -2,6 +2,7 @@ package c.odonfrancisco.homeawayseattlesearch;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -45,6 +46,9 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
         final Place currentPlace = mPlaceList.get(i);
 
+        SharedPreferences sharedPreferences = mContext.
+                getSharedPreferences("c.odonfrancisco.homeawayseattlesearch", Context.MODE_PRIVATE);
+
 //        Should I be calling glide here? Or is it better to save the bitmap to the
 //                Place object? I have a feeling its better to save the bitmap to the
 //                object but youre the god here Amit. LMK whats up
@@ -56,7 +60,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         viewHolder.placeName.setText(currentPlace.getName());
         viewHolder.placeCategory.setText(currentPlace.getCategory());
         viewHolder.placeDistance.setText(currentPlace.getDistance());
-        viewHolder.placeFavorited.setText("" + currentPlace.isFavorited());
+
+        viewHolder.placeFavorited.setText("" + sharedPreferences.getBoolean(currentPlace.getId(), false));
 
         viewHolder.parentLayout.setOnClickListener(new View.OnClickListener() {
             @Override
