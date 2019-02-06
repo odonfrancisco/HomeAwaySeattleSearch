@@ -4,6 +4,7 @@ import com.google.android.gms.maps.model.LatLng;
 
 import org.parceler.Parcel;
 
+//try to implement parcelable
 @Parcel
 public class Place {
     String id;
@@ -15,6 +16,7 @@ public class Place {
     String icon;
     String distance;
     boolean favorited;
+    FourSqLocation location;
 
     public Place(){}
 

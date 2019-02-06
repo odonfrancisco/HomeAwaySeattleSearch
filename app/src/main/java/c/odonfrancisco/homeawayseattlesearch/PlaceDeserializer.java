@@ -1,14 +1,6 @@
 package c.odonfrancisco.homeawayseattlesearch;
 
-import com.google.gson.JsonDeserializationContext;
-import com.google.gson.JsonDeserializer;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParseException;
-
-import java.lang.reflect.Type;
-import java.text.DecimalFormat;
-
+/*
 public class PlaceDeserializer implements JsonDeserializer<Place> {
     @Override
     public Place deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
@@ -50,3 +42,4 @@ public class PlaceDeserializer implements JsonDeserializer<Place> {
         return newPlace;
     }
 }
+*/

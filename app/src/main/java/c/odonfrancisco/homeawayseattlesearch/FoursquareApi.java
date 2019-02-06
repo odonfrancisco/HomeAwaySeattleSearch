@@ -1,6 +1,5 @@
 package c.odonfrancisco.homeawayseattlesearch;
 
-import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
@@ -16,15 +15,18 @@ public interface FoursquareApi {
 
     String v = "20180323";
 
-    String url = apiHttp +
+   /* String url = apiHttp +
             "client_id=" + clientId +
             "&client_secret=" + clientSecret +
             "&v=" + v ;
-
-    @GET(url)
-    Call<ResponseBody> getPlaces(
+*/
+    @GET("venues/search")
+    Call<FSResponse> getPlaces(
             @Query("limit") String limit,
             @Query("ll") String ll,
-            @Query("query") String query
+            @Query("query") String query,
+            @Query("client_id") String clientId,
+            @Query("client_secret") String clientSecret,
+            @Query("v") String v
     );
 }

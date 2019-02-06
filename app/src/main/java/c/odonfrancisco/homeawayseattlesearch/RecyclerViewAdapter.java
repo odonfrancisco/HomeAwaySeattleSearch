@@ -15,7 +15,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.google.gson.Gson;
 
 import org.parceler.Parcels;
 
@@ -34,17 +33,18 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int position) {
         View view = LayoutInflater.from(viewGroup.getContext())
                 .inflate(R.layout.recycler_view_list_item, viewGroup, false);
         return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
+    public void onBindViewHolder(@NonNull ViewHolder viewHolder, int position) {
         Log.d(TAG, "onBindViewHolder called");
 
-        final Place currentPlace = mPlaceList.get(i);
+        final Place currentPlace = mPlaceList.get(position);
+        //look into databinding
 
         SharedPreferences sharedPreferences = mContext.
                 getSharedPreferences("c.odonfrancisco.homeawayseattlesearch", Context.MODE_PRIVATE);
@@ -68,10 +68,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             public void onClick(View v) {
                 Toast.makeText(mContext, currentPlace.getName(), Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(v.getContext(), PlaceDetailsActivity.class);
-                Gson gson = new Gson();
-
                 intent.putExtra("currentPlace", Parcels.wrap(currentPlace));
-
                 v.getContext().startActivity(intent);
             }
         });

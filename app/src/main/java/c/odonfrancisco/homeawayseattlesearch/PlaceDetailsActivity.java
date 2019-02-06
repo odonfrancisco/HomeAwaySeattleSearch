@@ -3,7 +3,6 @@ package c.odonfrancisco.homeawayseattlesearch;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
@@ -38,8 +37,6 @@ public class PlaceDetailsActivity extends AppCompatActivity implements OnMapRead
         setContentView(R.layout.activity_place_details);
 
         CollapsingToolbarLayout toolbarLayout = findViewById(R.id.toolBarLayout);
-
-
         sharedPreferences = this.getSharedPreferences("c.odonfrancisco.homeawayseattlesearch", Context.MODE_PRIVATE);
 
         Gson gson = new Gson();
@@ -47,7 +44,6 @@ public class PlaceDetailsActivity extends AppCompatActivity implements OnMapRead
         currentPlace = Parcels.unwrap(getIntent().getParcelableExtra("currentPlace"));
 
         Log.d(TAG, gson.toJson(currentPlace));
-
 
 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
@@ -72,7 +68,10 @@ public class PlaceDetailsActivity extends AppCompatActivity implements OnMapRead
 
         mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
 
-        LatLng currentLatLng = currentPlace.getLatLng();
+        LatLng currentLatLng = new LatLng(
+                Double.parseDouble(currentPlace.location.lat),
+                Double.parseDouble(currentPlace.location.lng)
+        );
         LatLng centralSeattle = Constants.seattleCenterll;
 
         setMapMarkers(mMap, currentLatLng, centralSeattle);
